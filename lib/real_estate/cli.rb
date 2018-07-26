@@ -1,5 +1,6 @@
 class RealEstate::CLI
     def call
+        RealEstate::Property.today
         puts "Today's Properties:"
         list_properties
         menu
@@ -12,8 +13,8 @@ class RealEstate::CLI
         #     1. 2100 Renard Ct - $325,000 - 1508 Square_Feet
         #     2. 115 Hudson St - $285,000 - 1622 Square_Feet
         # DOC
-        @properties = RealEstate::Property.today
-        @properties.each.with_index(1) do |property, i|
+        properties = RealEstate::Property.all
+        properties.each.with_index(1) do |property, i|
             puts "#{i}. #{property.address} - #{property.price}"
         end
     end
