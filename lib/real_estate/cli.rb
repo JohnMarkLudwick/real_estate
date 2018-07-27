@@ -15,19 +15,19 @@ class RealEstate::CLI
         # DOC
         properties = RealEstate::Property.all
         properties.each.with_index(1) do |property, i|
-            puts "#{i}. #{property.address} - #{property.price}"
+            puts "#{i}. #{property.address}"
         end
     end
 
     def menu
         input = nil
         while input != "exit"
-            puts "Enter then number of the property you see more details about or typle list to see the properties again or type exit:"
+            puts "Enter the city of the properties you are interested or type exit:"
             input = gets.strip.downcase
-
-            if input.to_i > 0
-                the_property = @properties[input.to_i-1]
-                puts "#{the_property.address} - #{the_property.price}"
+            index = input.to_i - 1
+            if index > 0
+                property = RealEstate::Property.all[index]
+                puts "#{property.address} - #{property.price}"
             elsif input == "list"
                 list_properties
             else
@@ -43,5 +43,11 @@ class RealEstate::CLI
 
 
 end
+
+
+#next method should allow user to select from the list of properties a "city" and have a list of properties in
+#that city returned
+
+
 
 # doc = Nokogiri::HTML(open("http://www.loopnet.com/for-sale/annapolis-md/?e=u"))
